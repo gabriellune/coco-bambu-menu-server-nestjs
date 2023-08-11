@@ -1,4 +1,4 @@
-import { CreateDishDTO } from '../../src/modules/dishes/models/dtos/CreateDishDTO';
+import { CreateDishDTO } from '../../../../src/modules/dishes/models/dtos/CreateDishDTO';
 
 export const mockCreateDishDTO = (): CreateDishDTO =>
   ({

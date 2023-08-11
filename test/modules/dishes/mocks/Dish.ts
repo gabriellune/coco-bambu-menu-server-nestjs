@@ -1,4 +1,4 @@
-import { Dish } from '../../src/modules/dishes/models/interfaces/Dish';
+import { Dish } from '../../../../src/modules/dishes/models/interfaces/Dish';
 
 export const mockDish = (): Dish =>
   ({

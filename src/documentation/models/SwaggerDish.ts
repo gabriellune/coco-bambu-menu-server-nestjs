@@ -5,30 +5,30 @@ export class SwaggerDish {
     description: 'The id of the dish',
     example: 'id',
   })
-  readonly _id: string;
+  _id: string;
   @ApiProperty({
     description: 'The name of the dish',
     example: 'name',
   })
-  readonly name: string;
+  name: string;
   @ApiProperty({
     description: 'The description of the dish',
     example: 'description',
   })
-  readonly description: string;
+  description: string;
   @ApiProperty({
     description: 'The ingredients of the dish',
     example: ['ingredients'],
   })
-  readonly ingredients: string[];
+  ingredients: string[];
   @ApiProperty({
     description: 'The preparation time of the dish',
     example: 25,
   })
-  readonly preparationTime: number;
+  preparationTime: number;
   @ApiProperty({
     description: 'The preparation steps of the dish',
     example: ['preparationSteps'],
   })
-  readonly preparationSteps: string[];
+  preparationSteps: string[];
 }
