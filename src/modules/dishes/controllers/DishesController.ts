@@ -28,10 +28,10 @@ export class DishesController {
 
   @Get(':id')
   @ApiOkResponse({
-    description: 'Find All Dishes!',
+    description: 'Find Dish By Id!',
     type: SwaggerDish,
   })
-  @ApiOperation({ summary: 'Get Dish By Id' })
+  @ApiOperation({ summary: 'Find Dish By Id' })
   async getById(@Param('id') id: string): Promise<Dish> {
     return this.dishesService.getById(id);
   }

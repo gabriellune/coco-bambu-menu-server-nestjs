@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Model } from 'mongoose';
-import { CreateDishDTO } from '../src/modules/dishes/models/dtos/CreateDishDTO';
-import { Dish } from '../src/modules/dishes/models/interfaces/Dish';
-import { DishesService } from '../src/modules/dishes/services/DishesService';
+import { CreateDishDTO } from '../../../src/modules/dishes/models/dtos/CreateDishDTO';
+import { Dish } from '../../../src/modules/dishes/models/interfaces/Dish';
+import { DishesService } from '../../../src/modules/dishes/services/DishesService';
 import { mockDish } from './mocks/Dish';
 import { mockCreateDishDTO } from './mocks/CreateDishDTO';
 
