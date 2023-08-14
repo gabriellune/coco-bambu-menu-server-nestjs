@@ -11,7 +11,7 @@ import { AuthenticationService } from './services/AuthenticationService';
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '600s' },
+      signOptions: { expiresIn: '1200s' },
     }),
   ],
   providers: [AuthenticationService],
