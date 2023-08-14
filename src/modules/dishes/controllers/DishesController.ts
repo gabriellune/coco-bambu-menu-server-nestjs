@@ -5,10 +5,19 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { DishesService } from '../services/DishesService';
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Dish } from '../models/interfaces/Dish';
 import { CreateDishDTO } from '../models/dtos/CreateDishDTO';
 import { SwaggerDish } from '../../../documentation/models/SwaggerDish';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('dishes')
 @ApiTags('Dishes')
@@ -44,5 +53,16 @@ export class DishesController {
   @ApiOperation({ summary: 'Create Dish' })
   async create(@Body() payload: CreateDishDTO): Promise<Dish> {
     return this.dishesService.create(payload);
+  }
+
+  @ApiCreatedResponse({
+    description: 'Image uploaded',
+    type: SwaggerDish,
+  })
+  @ApiOperation({ summary: 'Upload Dish Image' })
+  @Post('image/upload')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadImage(@UploadedFile() file: Express.Multer.File) {
+    return this.dishesService.uploadDishImage(file);
   }
 }
