@@ -7,7 +7,7 @@ import { AppModule } from './AppModule';
 const PORT = process.env.PORT;
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.setGlobalPrefix('api');
   const config = new DocumentBuilder()
     .setTitle('Coco Bambu Menu')
