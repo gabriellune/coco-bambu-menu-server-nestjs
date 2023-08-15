@@ -12,7 +12,7 @@ Serviço responsável pela administração de usúarios e do cardápio do Coco B
 - Jest
 - Cloudinary
 
-## Instalção 👩‍💻
+## Instalação 👩‍💻
 
 Para instalar as dependencias do projeto, rode o comando abaixo:
 
