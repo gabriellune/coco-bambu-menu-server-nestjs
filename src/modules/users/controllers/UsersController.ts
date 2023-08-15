@@ -4,17 +4,19 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { UsersService } from '../services/UsersService';
 import { CreateUserDTO } from '../models/dtos/CreateUserDTO';
 import { User } from '../models/interfaces/User';
 import { SwaggerUser } from 'src/documentation/models/SwaggerUser';
+import { AuthGuard } from 'src/modules/authentication/shared/AuthGuard';
 
 @Controller('users')
 @ApiTags('Users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
+  @UseGuards(AuthGuard)
   @Get()
   @ApiOkResponse({
     description: 'Find All Users!',
@@ -26,6 +28,7 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @UseGuards(AuthGuard)
   @Get(':id')
   @ApiOkResponse({
     description: 'Find User By Id!',
@@ -36,6 +39,7 @@ export class UsersController {
     return this.usersService.getById(id);
   }
 
+  @UseGuards(AuthGuard)
   @Get('user-name/:username')
   @ApiOkResponse({
     description: 'Find User By UserName!',

@@ -4,12 +4,12 @@ import { Readable } from 'stream';
 
 @Injectable()
 export class CloudinaryService {
-  uploadFile(file: Express.Multer.File): Promise<any> {
+  uploadFile(file: Express.Multer.File): Promise<{ url: string }> {
     return new Promise<any>((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         (error, result) => {
           if (error) return reject(error);
-          resolve(result.secure_url);
+          resolve({ url: result.secure_url });
         },
       );
 

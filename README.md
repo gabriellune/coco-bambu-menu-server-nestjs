@@ -1,73 +1,61 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# coco-bambu-menu-server 🚀
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Serviço responsável pela administração de usúarios e do cardápio do Coco Bambu.
+(Resolução do teste técnico proposto pela Tagme Food Solutions)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tecnologias do Repositório 👨‍💻 
 
-## Description
+- NPM
+- NestJS
+- Swagger
+- MongoDb
+- Jest
+- Cloudinary
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Instalção 👩‍💻
 
-## Installation
+Para instalar as dependencias do projeto, rode o comando abaixo:
 
 ```bash
 $ npm install
 ```
+## Antes de rodar o projeto localmente, adicione valores as seguintes variaveis no arquivo .env
 
-## Running the app
+- DB_USERNAME (Username referente ao MongoDb) 
+- DB_PASSWORD (Senha referente ao MongoDb)
+- JWT_KEY (Adicione um valor para gerar o token de autorização para acessar os endpoints)
+- CLOUD_NAME (Nome da cloud referente ao Cloudinary)
+- API_KEY (Chave da api referente ao Cloudinary)
+- API_SECRET ('Segredo' da api referente ao Cloudinary)
+
+## Rodando o projeto localmente 🏠
+
+Para rodar o projeto:
 
 ```bash
-# development
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+Caso ocorra algum erro, para rodar o projeto, entre em contato comigo pelo email: gabriellune@outlook.com
+
+## Para rodar os testes unitários 🧪
 
 ```bash
-# unit tests
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
+## Para acessar a documentação Swagger Api📖
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Com o projeto rodando, abra o link seguinte no seu navegador:
 
-## Stay in touch
+http://localhost:8000/documentation/
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Para tudo ocorrer bem...
 
-## License
+Crie seu usúario em 'POST api/users' e obtenha o token de acesso em 'POST api/authentication/login'.
+Agora voce pode utilizar todos os endpoints referentes as API's de usúarios (users) e pratos (dishes).
 
-Nest is [MIT licensed](LICENSE).
+## Observações
+
+Não esqueça de passar o token obtido, na header das requisições com a chave 'Authorization' em seu postman/insomnia.
+É necessário fazer o upload das imagens referente a cada prato para serem exibidas pelo frontend, no endpoint 'POST api/dishes/image/upload', e serão salvas no Cloudinary. Esse upload, pode ocorrer mesmo depois do prato ser cadastro, basta posteriomente ao upload, adicionar as urls referente pela rota 'PATCH api/dishes/:id/add-image-url'

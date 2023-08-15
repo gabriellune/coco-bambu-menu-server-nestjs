@@ -6,4 +6,6 @@ export const DishSchema = new mongoose.Schema({
   ingredients: Array<string>,
   preparationTime: Number,
   preparationSteps: Array<string>,
+  bigImageUrl: String,
+  smallImageUrl: String,
 });

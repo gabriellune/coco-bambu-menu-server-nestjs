@@ -7,4 +7,6 @@ export interface Dish extends Document {
   readonly ingredients: string[];
   readonly preparationTime: number;
   readonly preparationSteps: string[];
+  readonly bigImageUrl: string;
+  readonly smallImageUrl: string;
 }

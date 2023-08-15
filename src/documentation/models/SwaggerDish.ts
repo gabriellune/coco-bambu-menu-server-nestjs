@@ -31,4 +31,14 @@ export class SwaggerDish {
     example: ['preparationSteps'],
   })
   preparationSteps: string[];
+  @ApiProperty({
+    description: 'The big image url of the dish',
+    example: 'url.com',
+  })
+  bigImageUrl: string;
+  @ApiProperty({
+    description: 'The small image url of the dish',
+    example: 'url.com',
+  })
+  smalImageUrl: string;
 }
