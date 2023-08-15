@@ -8,22 +8,29 @@ import { DishesService } from '../services/DishesService';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  Patch,
   Post,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { Dish } from '../models/interfaces/Dish';
 import { CreateDishDTO } from '../models/dtos/CreateDishDTO';
 import { SwaggerDish } from '../../../documentation/models/SwaggerDish';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { SwaggerUploadDishImage } from 'src/documentation/models/SwaggerUploadDishImage';
+import { AddImageUrlDTO } from '../models/dtos/AddImageUrlDTO';
+import { AuthGuard } from 'src/modules/authentication/shared/AuthGuard';
 
 @Controller('dishes')
 @ApiTags('Dishes')
 export class DishesController {
   constructor(private dishesService: DishesService) {}
 
+  @UseGuards(AuthGuard)
   @Get()
   @ApiOkResponse({
     description: 'Find All Dishes!',
@@ -35,6 +42,7 @@ export class DishesController {
     return this.dishesService.findAll();
   }
 
+  @UseGuards(AuthGuard)
   @Get(':id')
   @ApiOkResponse({
     description: 'Find Dish By Id!',
@@ -45,6 +53,7 @@ export class DishesController {
     return this.dishesService.getById(id);
   }
 
+  @UseGuards(AuthGuard)
   @Post()
   @ApiCreatedResponse({
     description: 'Dish Created',
@@ -55,14 +64,38 @@ export class DishesController {
     return this.dishesService.create(payload);
   }
 
+  @UseGuards(AuthGuard)
+  @Post('image/upload')
   @ApiCreatedResponse({
     description: 'Image uploaded',
-    type: SwaggerDish,
+    type: SwaggerUploadDishImage,
   })
   @ApiOperation({ summary: 'Upload Dish Image' })
-  @Post('image/upload')
   @UseInterceptors(FileInterceptor('file'))
-  uploadImage(@UploadedFile() file: Express.Multer.File) {
+  uploadDishImage(
+    @UploadedFile() file: Express.Multer.File,
+  ): Promise<{ url: string }> {
     return this.dishesService.uploadDishImage(file);
+  }
+
+  @UseGuards(AuthGuard)
+  @Delete(':id')
+  @ApiOperation({ summary: 'Delete Dish by Id' })
+  async delete(@Param('id') id: string): Promise<void> {
+    void this.dishesService.delete(id);
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch(':id/add-image-url')
+  @ApiOkResponse({
+    description: 'Add Images to Dish!',
+    type: SwaggerDish,
+  })
+  @ApiOperation({ summary: 'Add image url' })
+  async addImageUrl(
+    @Param('id') id: string,
+    @Body() payload: AddImageUrlDTO,
+  ): Promise<Dish> {
+    return this.dishesService.addImageUrl(id, payload);
   }
 }

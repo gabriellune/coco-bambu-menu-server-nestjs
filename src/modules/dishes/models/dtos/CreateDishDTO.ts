@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateDishDTO {
   @ApiProperty({
@@ -41,4 +47,20 @@ export class CreateDishDTO {
   @IsNotEmpty()
   @IsArray()
   preparationSteps: string[];
+
+  @ApiProperty({
+    description: 'The url from big image of the dish',
+    example: 'url.com',
+  })
+  @IsOptional()
+  @IsString()
+  bigImageUrl: string;
+
+  @ApiProperty({
+    description: 'The url from small image of the dish',
+    example: 'url.com',
+  })
+  @IsOptional()
+  @IsString()
+  smallImageUrl: string;
 }

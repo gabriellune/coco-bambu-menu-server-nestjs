@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { Dish } from '../models/interfaces/Dish';
 import { CreateDishDTO } from '../models/dtos/CreateDishDTO';
 import { CloudinaryService } from './CloudinaryService';
+import { AddImageUrlDTO } from '../models/dtos/AddImageUrlDTO';
 
 @Injectable()
 export class DishesService {
@@ -30,7 +31,27 @@ export class DishesService {
     return this.dishModel.create(payload);
   }
 
-  async uploadDishImage(file: Express.Multer.File) {
+  async uploadDishImage(file: Express.Multer.File): Promise<{ url: string }> {
     return this.cloudinaryService.uploadFile(file);
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.dishModel.deleteOne({ _id: id });
+  }
+
+  async addImageUrl(id: string, payload: AddImageUrlDTO): Promise<Dish> {
+    const dish = await this.getById(id);
+
+    if (!dish) {
+      throw new BadRequestException('Dish not found!');
+    }
+
+    const { _id, ...rest } = dish.toObject();
+
+    const buildedDish = { ...rest, ...payload };
+
+    await this.dishModel.updateOne({ _id }, buildedDish);
+
+    return buildedDish;
   }
 }

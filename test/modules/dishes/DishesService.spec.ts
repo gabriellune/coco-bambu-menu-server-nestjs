@@ -5,11 +5,13 @@ import { Dish } from '../../../src/modules/dishes/models/interfaces/Dish';
 import { DishesService } from '../../../src/modules/dishes/services/DishesService';
 import { mockDish } from './mocks/Dish';
 import { mockCreateDishDTO } from './mocks/CreateDishDTO';
+import { CloudinaryService } from '../../../src/modules/dishes/services/CloudinaryService';
 
 const dishModelMock: Partial<Model<Dish>> = {
   find: jest.fn(),
   findById: jest.fn(),
   create: jest.fn(),
+  deleteOne: jest.fn(),
 };
 
 describe('DishesService', () => {
@@ -23,6 +25,7 @@ describe('DishesService', () => {
           provide: 'DISH_MODEL',
           useValue: dishModelMock,
         },
+        CloudinaryService,
       ],
     }).compile();
 
@@ -68,6 +71,16 @@ describe('DishesService', () => {
 
       await dishesService.create(createDishDTO);
       expect(dishModelMock.create).toHaveBeenCalledWith(createDishDTO);
+    });
+  });
+
+  describe('delete', () => {
+    it('should delete a dish', async () => {
+      jest.spyOn(dishModelMock, 'deleteOne').mockImplementation();
+      const id = 'mockId';
+
+      await dishesService.delete(id);
+      expect(dishModelMock.deleteOne).toHaveBeenCalledWith({ _id: id });
     });
   });
 });
