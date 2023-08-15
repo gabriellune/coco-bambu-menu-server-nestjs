@@ -57,5 +57,5 @@ Agora voce pode utilizar todos os endpoints referentes as API's de usúarios (us
 
 ## Observações
 
-Não esqueça de passar o token obtido, na header das requisições com a chave 'Authorization' em seu postman/insomnia.
+Não esqueça de passar o token obtido na header das requisições com a chave 'Authorization' em seu postman/insomnia.
 É necessário fazer o upload das imagens referente a cada prato para serem exibidas pelo frontend, no endpoint 'POST api/dishes/image/upload', e serão salvas no Cloudinary. Esse upload, pode ocorrer mesmo depois do prato ser cadastro, basta posteriomente ao upload, adicionar as urls referente pela rota 'PATCH api/dishes/:id/add-image-url'
